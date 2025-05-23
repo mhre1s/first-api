@@ -1,11 +1,17 @@
+
 const express = require('express')
+
+const calculate = require('./api/calculate')
+
 const app = express()
 
-app.post('/',(req, res) =>{
-    const {name, surname} = req.body
-    res.send(`Testando a API ${name} ${surname}`)
-})
+const port = 3030
 
-app.listen(9090, () =>{
-    console.log('Rodando servidor na porta 9090')
+app.use(express.json())
+
+
+app.post('/:operation', calculate)
+
+app.listen(port, () => {
+    console.log(`API rodando na porta: ${port}`)
 })
